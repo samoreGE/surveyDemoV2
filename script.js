@@ -1,6 +1,7 @@
-var totalOutcomes=0;
 var totalStudents=10;
 var tempOutcomesArray = ['This is test outcome 1!', 'This is another outcome! (it\'s the second one)', '3rd outcome is the charm!', 'Ok, maybe we add another outcome here at the end.'];
+
+var totalOutcomes=0;
 
 addOutcomesFromArray(tempOutcomesArray);
 refreshAll();
