@@ -1,0 +1,28 @@
+td {
+  max-width: 80px;	
+}
+.top-of-table {
+  text-align: center;
+}
+
+.outcome-text {
+	word-wrap: break-word;
+	max-width: 120px;	
+}
+
+.outcome-item {
+	align-items: center 
+}
+
+.top-col{
+   text-align: center; 
+}
+
+.sum-box {
+	 background-color: #3CBC8D;
+}
+
+.number-box {
+	width: 100%;
+	//max-width: 70px;
+}
