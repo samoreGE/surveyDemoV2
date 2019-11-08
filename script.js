@@ -1,13 +1,17 @@
-var totalStudents=10;
-var tempOutcomesArray = ['This is test outcome 1!', 'This is another outcome! (it\'s the second one)', '3rd outcome is the charm!', 'Ok, maybe we add another outcome here at the end.'];
+//TEMP VARIABLES (REPLACE W/ SQL WHEN POSSIBLE)
+const totalStudents=10;
+const tempOutcomesArray = ['This is test outcome 1!', 'This is another outcome! (it\'s the second one)', '3rd outcome is the charm!', 'Ok, maybe we add another outcome here at the end.'];
 
+//
 var goodColor="#9ACD32";
 var badColor="#FA8072	";
 
+//LOCAL VARIABLES
 var totalOutcomes=0;
 
-addOutcomesFromArray(tempOutcomesArray);
-refreshAll();
+
+//ON RUNTIME
+setUpPage(tempOutcomesArray);
 
 $('.number-box').keyup(function () { 
 	refreshAll();
@@ -15,6 +19,12 @@ $('.number-box').keyup(function () {
 $('.number-box').on("change", function () { 
 	refreshAll();
 });
+
+function setUpPage(outcomeArray) {
+	console.log("setUpPage("+outcomeArray+")");
+	addOutcomesFromArray(outcomeArray);
+	refreshAll();
+}
 
 function addOutcomesFromArray(outcomeArray) {
 	console.log("addOutcomesFromArray("+outcomeArray+")");
@@ -25,7 +35,6 @@ function addOutcomesFromArray(outcomeArray) {
 	}
 	refreshAll();
 }
-
 function refreshAll() {
 	console.log("refreshAll()");
 	var i;
@@ -33,7 +42,7 @@ function refreshAll() {
 		console.log("i="+i);
 		refresh(i);
 	}
-	allSumsMatched();
+	refreshButton(allSumsMatched());
 }
 
 function addNewOutcome(outcomeText) {
@@ -42,14 +51,12 @@ function addNewOutcome(outcomeText) {
 	totalOutcomes++;
 	console.log("totalOutcomes="+totalOutcomes);
 }
-
 function refresh(num) {
 	console.log("refresh("+num+")");
 	var sum=getSumOf(num);
 	$("#sum"+num).val(sum+"/"+totalStudents);
 	setSumColor(num, sum==totalStudents);
 }
-
 function addOutcome(num, outcomeText) {
 	console.log("addOutcome("+num+")");
 	var newOutcome = $("<tr class=\"outcome-row\" id=\"outcome"+num+"\">");
@@ -63,7 +70,6 @@ function addOutcome(num, outcomeText) {
 		<td class=\'outcome-input\'><input type=\'text\' min=\"0\" class=\'number-box sum-box\' id=\'sum"+num+"\' disabled /></td>");
 	$("#outcomes").append(newOutcome);
 }
-
 function setSumColor(num, valid) {
 	console.log("setSumColor("+num+","+valid+")");
 	var boxColor;
@@ -74,7 +80,16 @@ function setSumColor(num, valid) {
 	}
 	$("#sum"+num).css({"background-color": boxColor});
 }
-
+function refreshButton(sumsMatched) {
+	console.log("refreshButton("+sumsMatched+")");
+	if(sumsMatched) {
+		document.getElementById("submit-button").removeAttribute("disabled");
+		$("#submit-button").css({"background-color": goodColor});
+	} else {
+		document.getElementById("submit-button").setAttribute("disabled", "disabled");
+		$("#submit-button").css({"background-color": badColor});
+	}
+}
 function allSumsMatched() {
 	console.log("allSumsMatched()");
 	var i;
@@ -88,7 +103,6 @@ function allSumsMatched() {
 	console.log("returning matched="+matched);
 	return matched;
 }
-
 function getSumOf(num) {
 	console.log("getSumOf("+num+")");
 	var str=Number($("#str"+num).val());

@@ -5,10 +5,15 @@ td {
   text-align: center;
 }
 
+.outcome-table {
+	background: Gainsboro;
+}
+
 .names-row {
 	font-family: Adobe Garamond Pro;
 	font-size: 20px;
 }
+
 
 .outcome-row{
 	font-family: Trebuchet MS;
@@ -16,11 +21,13 @@ td {
 
 .outcome-text {
 	word-wrap: break-word;
-	max-width: 120px;	
+	font-size: 14px;
+	max-width: 120px;
 }
 
 .outcome-input {
-	align-items: center 
+	align-items: center;
+	font-size:18px;
 }
 
 .top-col{
@@ -36,7 +43,10 @@ td {
 	//max-width: 70px;
 }
 
-.button-row {
-	margin-left: auto;
-	margin-right: auto;
+#submit-button {
+	font-family: Trebuchet MS;
+	font-size: 18px;
+	width: 10%;
+	margin-left: 88%;
+	margin-right: 2%;
 }
