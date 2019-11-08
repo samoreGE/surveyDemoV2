@@ -1,6 +1,9 @@
 var totalStudents=10;
 var tempOutcomesArray = ['This is test outcome 1!', 'This is another outcome! (it\'s the second one)', '3rd outcome is the charm!', 'Ok, maybe we add another outcome here at the end.'];
 
+var goodColor="#9ACD32";
+var badColor="#FA8072	";
+
 var totalOutcomes=0;
 
 addOutcomesFromArray(tempOutcomesArray);
@@ -20,6 +23,7 @@ function addOutcomesFromArray(outcomeArray) {
 		console.log("i="+i);
 		addNewOutcome(outcomeArray[i]);
 	}
+	refreshAll();
 }
 
 
@@ -36,13 +40,14 @@ function addNewOutcome(outcomeText) {
 	console.log("addNewOutcome()");
 	addOutcome(totalOutcomes, outcomeText);
 	totalOutcomes++;
-	refreshAll();
 	console.log("totalOutcomes="+totalOutcomes);
 }
 
 function refresh(num) {
 	console.log("refresh("+num+")");
-	$("#sum"+num).val(getSumOf(num)+"/"+totalStudents);
+	var sum=getSumOf(num);
+	$("#sum"+num).val(sum+"/"+totalStudents);
+	setSumColor(num, sum==totalStudents);
 }
 
 function addOutcome(num, outcomeText) {
@@ -57,6 +62,17 @@ function addOutcome(num, outcomeText) {
 		<td class=\'outcome-item\'><input type=\'number\' min=\"0\" class=\'number-box\' id=\'na"+num+"\'/></td>\
 		<td class=\'outcome-item\'><input type=\'text\' min=\"0\" class=\'number-box sum-box\' id=\'sum"+num+"\' disabled /></td>");
 	$("#outcomes").append(newOutcome);
+}
+
+function setSumColor(num, valid) {
+	console.log("setSumColor("+num+","+valid+")");
+	var boxColor;
+	if(valid) {
+		boxColor=goodColor;
+	} else {
+		boxColor=badColor;
+	}
+	$("#sum"+num).css({"background-color": boxColor});
 }
 
 function getSumOf(num) {
