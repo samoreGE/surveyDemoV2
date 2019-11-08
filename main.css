@@ -5,12 +5,21 @@ td {
   text-align: center;
 }
 
+.names-row {
+	font-family: Adobe Garamond Pro;
+	font-size: 20px;
+}
+
+.outcome-row{
+	font-family: Trebuchet MS;
+}
+
 .outcome-text {
 	word-wrap: break-word;
 	max-width: 120px;	
 }
 
-.outcome-item {
+.outcome-input {
 	align-items: center 
 }
 

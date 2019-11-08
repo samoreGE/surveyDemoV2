@@ -26,7 +26,6 @@ function addOutcomesFromArray(outcomeArray) {
 	refreshAll();
 }
 
-
 function refreshAll() {
 	console.log("refreshAll()");
 	var i;
@@ -34,6 +33,7 @@ function refreshAll() {
 		console.log("i="+i);
 		refresh(i);
 	}
+	allSumsMatched();
 }
 
 function addNewOutcome(outcomeText) {
@@ -55,12 +55,12 @@ function addOutcome(num, outcomeText) {
 	var newOutcome = $("<tr class=\"outcome-row\" id=\"outcome"+num+"\">");
 	newOutcome.html("\
 		<th scope=\"row\" class=\"outcome-text\" id=\"question"+num+"\">"+outcomeText+"</th>\
-		<td class=\'outcome-item\'><input type=\'number\' min=\"0\" class=\'number-box\' id=\'str"+num+"\'/></td>\
-		<td class=\'outcome-item\'><input type=\'number\' min=\"0\" class=\'number-box\' id=\'sat"+num+"\'/></td>\
-		<td class=\'outcome-item\'><input type=\'number\' min=\"0\" class=\'number-box\' id=\'ng"+num+"\'/></td>\
-		<td class=\'outcome-item\'><input type=\'number\' min=\"0\" class=\'number-box\' id=\'unsat"+num+"\'/></td>\
-		<td class=\'outcome-item\'><input type=\'number\' min=\"0\" class=\'number-box\' id=\'na"+num+"\'/></td>\
-		<td class=\'outcome-item\'><input type=\'text\' min=\"0\" class=\'number-box sum-box\' id=\'sum"+num+"\' disabled /></td>");
+		<td class=\'outcome-input\'><input type=\'number\' min=\"0\" class=\'number-box\' id=\'str"+num+"\'/></td>\
+		<td class=\'outcome-input\'><input type=\'number\' min=\"0\" class=\'number-box\' id=\'sat"+num+"\'/></td>\
+		<td class=\'outcome-input\'><input type=\'number\' min=\"0\" class=\'number-box\' id=\'ng"+num+"\'/></td>\
+		<td class=\'outcome-input\'><input type=\'number\' min=\"0\" class=\'number-box\' id=\'unsat"+num+"\'/></td>\
+		<td class=\'outcome-input\'><input type=\'number\' min=\"0\" class=\'number-box\' id=\'na"+num+"\'/></td>\
+		<td class=\'outcome-input\'><input type=\'text\' min=\"0\" class=\'number-box sum-box\' id=\'sum"+num+"\' disabled /></td>");
 	$("#outcomes").append(newOutcome);
 }
 
@@ -73,6 +73,20 @@ function setSumColor(num, valid) {
 		boxColor=badColor;
 	}
 	$("#sum"+num).css({"background-color": boxColor});
+}
+
+function allSumsMatched() {
+	console.log("allSumsMatched()");
+	var i;
+	var matched=true;
+	for (i = 0; i < totalOutcomes; i++) {
+		console.log("i="+i);
+		var ithSumMatched=getSumOf(i)==totalStudents;
+		console.log("ithSumMatched="+ithSumMatched);
+		matched=matched&&ithSumMatched;
+	}
+	console.log("returning matched="+matched);
+	return matched;
 }
 
 function getSumOf(num) {
